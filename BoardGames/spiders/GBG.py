@@ -37,11 +37,10 @@ class GbgSpider(scrapy.Spider):
 
         with open('pokedex.csv', 'a', newline='', encoding="utf-8") as output_file:
             dict_writer = csv.DictWriter(output_file, pokemon.keys())
+            if output_file.tell() == 0:
+                dict_writer.writeheader()
             dict_writer.writerows([pokemon])
         yield pokemon
 
 
-
-
-# ATENÇÃO #
-# Para criar o JSON use o seguinte comando: scrapy crawl pokedex -O pokedex.json
+# scrapy crawl pokedex

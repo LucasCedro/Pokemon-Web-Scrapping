@@ -49,8 +49,10 @@ class PokestatsSpider(scrapy.Spider):
 
         with open('pokestats.csv', 'a', newline='', encoding="utf-8") as output_file:
             dict_writer = csv.DictWriter(output_file, pokestats.keys())
+            if output_file.tell() == 0:
+                dict_writer.writeheader()
             dict_writer.writerows([pokestats])
         yield pokestats
 
-# ATENÇÃO #
-# Para criar o JSON use o seguinte comando: scrapy crawl pokedex -O pokedex.json
+
+# scrapy crawl pokestats
